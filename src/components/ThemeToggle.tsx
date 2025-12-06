@@ -1,6 +1,6 @@
 import { useStore } from '@tanstack/react-store'
 import { Moon, Sun, Monitor } from 'lucide-react'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
 import {
     DropdownMenu,
     DropdownMenuContent,

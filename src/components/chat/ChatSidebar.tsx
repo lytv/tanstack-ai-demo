@@ -1,10 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Link, useNavigate } from '@tanstack/react-router'
-import { Plus, MessageSquare, Pin } from 'lucide-react'
+import { useNavigate } from '@tanstack/react-router'
+import { Plus } from 'lucide-react'
 import { Button } from '../ui/button'
 import { ScrollArea } from '../ui/scroll-area'
-import { getChats, createChat } from '@/lib/chat-actions'
+import { getChats, createChat, deleteChat, toggleChatPin } from '@/lib/chat-actions'
 import { ChatSearchDialog } from './ChatSearchDialog'
+import { ChatListItem } from './ChatListItem'
 import {
     Sidebar,
     SidebarContent,
@@ -12,9 +13,6 @@ import {
     SidebarGroupContent,
     SidebarGroupLabel,
     SidebarHeader,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
 } from '../ui/sidebar'
 
 interface ChatSidebarProps {
@@ -31,10 +29,28 @@ export function ChatSidebar({ activeChatId }: ChatSidebarProps) {
     })
 
     const createChatMutation = useMutation({
-        mutationFn: () => createChat({ data: { title: 'New Chat' } } as any),
+        mutationFn: () => createChat({ data: { title: 'New Chat' } as any }),
         onSuccess: (newChat) => {
             queryClient.invalidateQueries({ queryKey: ['chats'] })
             navigate({ to: '/chat/$chatId', params: { chatId: newChat.id } })
+        },
+    })
+
+    const deleteChatMutation = useMutation({
+        mutationFn: (chatId: string) => deleteChat({ data: { chatId } } as any),
+        onSuccess: (_, deletedChatId) => {
+            queryClient.invalidateQueries({ queryKey: ['chats'] })
+            // If we deleted the active chat, navigate to home
+            if (deletedChatId === activeChatId) {
+                navigate({ to: '/' })
+            }
+        },
+    })
+
+    const togglePinMutation = useMutation({
+        mutationFn: (chatId: string) => toggleChatPin({ data: { chatId } } as any),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['chats'] })
         },
     })
 
@@ -63,21 +79,17 @@ export function ChatSidebar({ activeChatId }: ChatSidebarProps) {
                         <SidebarGroup>
                             <SidebarGroupLabel>Pinned</SidebarGroupLabel>
                             <SidebarGroupContent>
-                                <SidebarMenu>
+                                <div className="space-y-1">
                                     {pinnedChats.map((chat) => (
-                                        <SidebarMenuItem key={chat.id}>
-                                            <SidebarMenuButton
-                                                asChild
-                                                isActive={activeChatId === chat.id}
-                                            >
-                                                <Link to="/chat/$chatId" params={{ chatId: chat.id }}>
-                                                    <Pin className="h-4 w-4" />
-                                                    <span className="truncate">{chat.title}</span>
-                                                </Link>
-                                            </SidebarMenuButton>
-                                        </SidebarMenuItem>
+                                        <ChatListItem
+                                            key={chat.id}
+                                            chat={chat}
+                                            isActive={activeChatId === chat.id}
+                                            onDelete={() => deleteChatMutation.mutate(chat.id)}
+                                            onTogglePin={() => togglePinMutation.mutate(chat.id)}
+                                        />
                                     ))}
-                                </SidebarMenu>
+                                </div>
                             </SidebarGroupContent>
                         </SidebarGroup>
                     )}
@@ -85,21 +97,17 @@ export function ChatSidebar({ activeChatId }: ChatSidebarProps) {
                     <SidebarGroup>
                         <SidebarGroupLabel>Recent</SidebarGroupLabel>
                         <SidebarGroupContent>
-                            <SidebarMenu>
+                            <div className="space-y-1">
                                 {recentChats.map((chat) => (
-                                    <SidebarMenuItem key={chat.id}>
-                                        <SidebarMenuButton
-                                            asChild
-                                            isActive={activeChatId === chat.id}
-                                        >
-                                            <Link to="/chat/$chatId" params={{ chatId: chat.id }}>
-                                                <MessageSquare className="h-4 w-4" />
-                                                <span className="truncate">{chat.title}</span>
-                                            </Link>
-                                        </SidebarMenuButton>
-                                    </SidebarMenuItem>
+                                    <ChatListItem
+                                        key={chat.id}
+                                        chat={chat}
+                                        isActive={activeChatId === chat.id}
+                                        onDelete={() => deleteChatMutation.mutate(chat.id)}
+                                        onTogglePin={() => togglePinMutation.mutate(chat.id)}
+                                    />
                                 ))}
-                            </SidebarMenu>
+                            </div>
                         </SidebarGroupContent>
                     </SidebarGroup>
                 </ScrollArea>
@@ -107,3 +115,5 @@ export function ChatSidebar({ activeChatId }: ChatSidebarProps) {
         </Sidebar>
     )
 }
+
+

@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Bot } from 'lucide-react'
-import { Button } from '../../components/ui/button'
+import { Button } from '@/components/ui/button'
 import { createChat } from '@/lib/chat-actions'
 
 export const Route = createFileRoute('/chat/')({

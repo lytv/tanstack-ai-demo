@@ -126,6 +126,40 @@ export const updateChatTitle = createServerFn({
         .where(eq(chats.id, chatId))
 })
 
+// Delete a chat
+export const deleteChat = createServerFn({
+    method: 'POST',
+}).handler(async (ctx) => {
+    if (!ctx.data) throw new Error('Chat ID required')
+    const { chatId } = ctx.data as { chatId: string }
+
+    // Delete chat (messages will be cascade deleted due to foreign key constraint)
+    await db.delete(chats).where(eq(chats.id, chatId))
+
+    return { success: true }
+})
+
+// Toggle chat pin status
+export const toggleChatPin = createServerFn({
+    method: 'POST',
+}).handler(async (ctx) => {
+    if (!ctx.data) throw new Error('Chat ID required')
+    const { chatId } = ctx.data as { chatId: string }
+
+    // Get current pin status
+    const [chat] = await db.select().from(chats).where(eq(chats.id, chatId))
+
+    if (!chat) throw new Error('Chat not found')
+
+    // Toggle the pin status
+    await db
+        .update(chats)
+        .set({ isPinned: !chat.isPinned, updatedAt: new Date() })
+        .where(eq(chats.id, chatId))
+
+    return { success: true, isPinned: !chat.isPinned }
+})
+
 // Stream chat response
 export const streamChatResponse = createServerFn({
     method: 'POST',

@@ -1,8 +1,8 @@
 import { Menu } from 'lucide-react'
-import { Button } from './ui/button'
-import { ThemeToggle } from './ThemeToggle'
-import { ModelSelector } from './chat/ModelSelector'
-import { useSidebar } from './ui/sidebar'
+import { Button } from '@/components/ui/button'
+import { ThemeToggle } from '@/components/ThemeToggle'
+import { ModelSelector } from '@/components/chat/ModelSelector'
+import { useSidebar } from '@/components/ui/sidebar'
 
 export default function Header() {
   const { toggleSidebar, isMobile } = useSidebar()

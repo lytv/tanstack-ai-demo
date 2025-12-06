@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { Bot, MessageSquare, Zap, Shield } from 'lucide-react'
-import { Button } from '../components/ui/button'
+import { Button } from '@/components/ui/button'
 
 export const Route = createFileRoute('/')({
   component: Home,
