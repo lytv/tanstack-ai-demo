@@ -1,0 +1,24 @@
+{
+  "projectName": "tanstack-ai-demo",
+  "mode": "file-router",
+  "typescript": true,
+  "tailwind": true,
+  "packageManager": "npm",
+  "addOnOptions": {
+    "drizzle": {
+      "database": "postgresql"
+    }
+  },
+  "git": true,
+  "version": 1,
+  "framework": "react-cra",
+  "chosenAddOns": [
+    "cloudflare",
+    "start",
+    "shadcn",
+    "store",
+    "tanstack-query",
+    "db",
+    "drizzle"
+  ]
+}
