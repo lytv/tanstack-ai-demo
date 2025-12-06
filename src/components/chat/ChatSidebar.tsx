@@ -63,7 +63,7 @@ export function ChatSidebar({ activeChatId }: ChatSidebarProps) {
                 <div className="space-y-3 p-4">
                     <Button
                         onClick={() => createChatMutation.mutate()}
-                        className="w-full gap-2"
+                        className="w-full gap-2 blue-gradient blue-button-shadow border border-blue-400/30 hover:opacity-90 active:scale-[0.99] transition-all duration-150 text-white font-medium"
                         size="sm"
                     >
                         <Plus className="h-4 w-4" />
