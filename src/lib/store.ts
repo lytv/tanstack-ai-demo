@@ -69,6 +69,18 @@ export const AI_PROVIDERS = [
             },
         ],
     },
+    {
+        id: 'ollama',
+        name: 'Ollama (Local)',
+        models: [
+            {
+                id: 'llama3',
+                name: 'Llama 3',
+                supportsVision: false,
+                supportsPDF: false,
+            },
+        ],
+    },
 ] as const
 
 

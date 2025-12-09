@@ -18,6 +18,7 @@
         "@tanstack/ai-anthropic": "^0.0.2",
         "@tanstack/ai-client": "^0.0.2",
         "@tanstack/ai-gemini": "^0.0.2",
+        "@tanstack/ai-ollama": "^0.0.2",
         "@tanstack/ai-openai": "^0.0.2",
         "@tanstack/ai-react": "^0.0.2",
         "@tanstack/query-db-collection": "^0.2.0",
@@ -590,6 +591,8 @@
     "@tanstack/ai-client": ["@tanstack/ai-client@0.0.2", "", { "dependencies": { "@tanstack/ai": "0.0.2" } }, "sha512-PhKG0R1pJh2OieA/3Egh7wmS1OvVChE/jhoEYD8ZPcQLPmnCVFbsMRdhZ4FilQFKbouocUKPhjudO2pN5+grsA=="],
 
     "@tanstack/ai-gemini": ["@tanstack/ai-gemini@0.0.2", "", { "dependencies": { "@google/genai": "^1.30.0", "@tanstack/ai": "0.0.2" } }, "sha512-g/OU3K4eZTSKu4iduqJt2AJC3o25F3c7R3VJ2gTUpNZqo10b2JnKHR7xHcmUyVW9c0z04U23d9qEKgeZKQ3dsA=="],
+
+    "@tanstack/ai-ollama": ["@tanstack/ai-ollama@0.0.2", "", { "dependencies": { "@tanstack/ai": "0.0.2", "ollama": "^0.6.3", "zod": "^4.1.13" } }, "sha512-VHDTec7+OWM712QmD8atJxGwIzmhGuB7Rx4lXPFjTrgUetlRPKtdrY1BtqZrPeGrQ2TC9sceDCq+086CSYCPsA=="],
 
     "@tanstack/ai-openai": ["@tanstack/ai-openai@0.0.2", "", { "dependencies": { "@tanstack/ai": "0.0.2", "openai": "^6.9.1" } }, "sha512-N5+7Tw12+M4qPUsGZ9dQlo/ZcImrmmepvQpogF62XZmTBMG5oWi9AJqV4+Uh0w2D/610jQZlYNNF5RzHFmPtcg=="],
 
@@ -1233,6 +1236,8 @@
 
     "ohash": ["ohash@2.0.11", "", {}, "sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ=="],
 
+    "ollama": ["ollama@0.6.3", "", { "dependencies": { "whatwg-fetch": "^3.6.20" } }, "sha512-KEWEhIqE5wtfzEIZbDCLH51VFZ6Z3ZSa6sIOg/E/tBV8S51flyqBOXi+bRxlOYKDf8i327zG9eSTb8IJxvm3Zg=="],
+
     "openai": ["openai@6.10.0", "", { "peerDependencies": { "ws": "^8.18.0", "zod": "^3.25 || ^4.0" }, "optionalPeers": ["ws", "zod"], "bin": { "openai": "bin/cli" } }, "sha512-ITxOGo7rO3XRMiKA5l7tQ43iNNu+iXGFAcf2t+aWVzzqRaS0i7m1K2BhxNdaveB+5eENhO0VY1FkiZzhBk4v3A=="],
 
     "oxc-minify": ["oxc-minify@0.96.0", "", { "optionalDependencies": { "@oxc-minify/binding-android-arm64": "0.96.0", "@oxc-minify/binding-darwin-arm64": "0.96.0", "@oxc-minify/binding-darwin-x64": "0.96.0", "@oxc-minify/binding-freebsd-x64": "0.96.0", "@oxc-minify/binding-linux-arm-gnueabihf": "0.96.0", "@oxc-minify/binding-linux-arm-musleabihf": "0.96.0", "@oxc-minify/binding-linux-arm64-gnu": "0.96.0", "@oxc-minify/binding-linux-arm64-musl": "0.96.0", "@oxc-minify/binding-linux-riscv64-gnu": "0.96.0", "@oxc-minify/binding-linux-s390x-gnu": "0.96.0", "@oxc-minify/binding-linux-x64-gnu": "0.96.0", "@oxc-minify/binding-linux-x64-musl": "0.96.0", "@oxc-minify/binding-wasm32-wasi": "0.96.0", "@oxc-minify/binding-win32-arm64-msvc": "0.96.0", "@oxc-minify/binding-win32-x64-msvc": "0.96.0" } }, "sha512-dXeeGrfPJJ4rMdw+NrqiCRtbzVX2ogq//R0Xns08zql2HjV3Zi2SBJ65saqfDaJzd2bcHqvGWH+M44EQCHPAcA=="],
@@ -1520,6 +1525,8 @@
     "webpack-virtual-modules": ["webpack-virtual-modules@0.6.2", "", {}, "sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ=="],
 
     "whatwg-encoding": ["whatwg-encoding@3.1.1", "", { "dependencies": { "iconv-lite": "0.6.3" } }, "sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ=="],
+
+    "whatwg-fetch": ["whatwg-fetch@3.6.20", "", {}, "sha512-EqhiFU6daOA8kpjOWTL0olhVOF3i7OrFzSYiGsEMB8GcXS+RrzauAERX65xMeNWVqxA6HXH2m69Z9LaKKdisfg=="],
 
     "whatwg-mimetype": ["whatwg-mimetype@4.0.0", "", {}, "sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg=="],
 

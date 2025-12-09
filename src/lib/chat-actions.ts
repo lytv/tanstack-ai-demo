@@ -6,6 +6,7 @@ import { chat } from '@tanstack/ai'
 import { openai } from '@tanstack/ai-openai'
 import { anthropic } from '@tanstack/ai-anthropic'
 import { gemini } from '@tanstack/ai-gemini'
+import { ollama } from '@tanstack/ai-ollama'
 
 // Get all chats
 export const getChats = createServerFn({
@@ -205,6 +206,19 @@ export const streamChatResponse = createServerFn({
             adapter,
             model: model as any,
             messages: filteredMessages as any, // Cast to any for multimodal content
+        })
+        for await (const chunk of stream) {
+            if (chunk.type === 'content') {
+                yield { type: 'content', content: chunk.content }
+            }
+        }
+    } else if (provider === 'ollama') {
+        const baseURL = process.env.OLLAMA_BASE_URL || 'http://localhost:11434'
+        const adapter = ollama({ baseURL })
+        const stream = chat({
+            adapter,
+            model: model as any,
+            messages: filteredMessages as any,
         })
         for await (const chunk of stream) {
             if (chunk.type === 'content') {

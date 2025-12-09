@@ -51,11 +51,22 @@ export function GoogleIcon({ className }: { className?: string }) {
     )
 }
 
+export function OllamaIcon({ className }: { className?: string }) {
+    return (
+        <img
+            src="/ollama.svg"
+            alt="Ollama"
+            className={`${className} dark:invert`}
+        />
+    )
+}
+
 // Provider icon mapper
 export const PROVIDER_ICONS = {
     openai: OpenAIIcon,
     anthropic: AnthropicIcon,
     gemini: GoogleIcon,
+    ollama: OllamaIcon,
 } as const
 
 // Provider colors
@@ -63,6 +74,5 @@ export const PROVIDER_COLORS = {
     openai: 'text-foreground',
     anthropic: 'text-orange-600 dark:text-orange-400',
     gemini: 'text-blue-600 dark:text-blue-400',
+    ollama: 'text-purple-600 dark:text-purple-400',
 } as const
-
-

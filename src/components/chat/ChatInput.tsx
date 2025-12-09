@@ -135,7 +135,7 @@ export function ChatInput({ onSubmit, isLoading }: ChatInputProps) {
                             {/* Input row */}
                             <div className="flex items-end gap-2">
                                 {/* File Button */}
-                                <div>
+                                {/* <div>
                                     <input
                                         ref={fileInputRef}
                                         type="file"
@@ -160,7 +160,7 @@ export function ChatInput({ onSubmit, isLoading }: ChatInputProps) {
                                     >
                                         <Plus className="h-5 w-5" />
                                     </Button>
-                                </div>
+                                </div> */}
 
                                 {/* Textarea */}
                                 <div className="flex-1 bg-background/40 rounded-lg p-2">
