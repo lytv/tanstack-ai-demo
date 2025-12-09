@@ -9,11 +9,7 @@ if (!process.env.DATABASE_URL) {
 }
 
 // Use Neon serverless for Cloudflare Workers, postgres.js for local/Docker
-const isCloudflare =
-  typeof globalThis !== 'undefined' &&
-  'caches' in globalThis &&
-  typeof (globalThis as unknown as { caches: { default?: unknown } }).caches
-    ?.default !== 'undefined'
+const isCloudflare = process.env.DEPLOY_TARGET === 'cloudflare'
 
 export const db = isCloudflare
   ? drizzleNeon(neon(process.env.DATABASE_URL), { schema })
