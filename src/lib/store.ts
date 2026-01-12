@@ -93,6 +93,24 @@ export const AI_PROVIDERS = [
             },
         ],
     },
+    {
+        id: 'grok',
+        name: 'xAI',
+        models: [
+            {
+                id: 'grok-4',
+                name: 'Grok 4',
+                supportsVision: true,
+                supportsPDF: false,
+            },
+            {
+                id: 'grok-3',
+                name: 'Grok 3',
+                supportsVision: true,
+                supportsPDF: false,
+            },
+        ],
+    },
 ] as const
 
 

@@ -61,12 +61,23 @@ export function OllamaIcon({ className }: { className?: string }) {
     )
 }
 
+export function GrokIcon({ className }: { className?: string }) {
+    return (
+        <img
+            src="/grok.png"
+            alt="Grok"
+            className={className}
+        />
+    )
+}
+
 // Provider icon mapper
 export const PROVIDER_ICONS = {
     openai: OpenAIIcon,
     anthropic: AnthropicIcon,
     gemini: GoogleIcon,
     ollama: OllamaIcon,
+    grok: GrokIcon,
 } as const
 
 // Provider colors
@@ -75,4 +86,5 @@ export const PROVIDER_COLORS = {
     anthropic: 'text-orange-600 dark:text-orange-400',
     gemini: 'text-blue-600 dark:text-blue-400',
     ollama: 'text-purple-600 dark:text-purple-400',
+    grok: 'text-foreground',
 } as const

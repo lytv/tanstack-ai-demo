@@ -3,10 +3,11 @@ import { db } from '@/db'
 import { chats, messages } from '@/db/schema'
 import { desc, eq, asc } from 'drizzle-orm'
 import { chat } from '@tanstack/ai'
-import { openai } from '@tanstack/ai-openai'
-import { anthropic } from '@tanstack/ai-anthropic'
-import { gemini } from '@tanstack/ai-gemini'
-import { ollama } from '@tanstack/ai-ollama'
+import { openaiText } from '@tanstack/ai-openai'
+import { anthropicText } from '@tanstack/ai-anthropic'
+import { geminiText } from '@tanstack/ai-gemini'
+import { ollamaText } from '@tanstack/ai-ollama'
+import { createGrokText } from '@tanstack/ai-grok'
 
 // Get all chats
 export const getChats = createServerFn({
@@ -187,26 +188,27 @@ export const streamChatResponse = createServerFn({
         return m.content && m.content.length > 0
     })
 
-    // Get adapter based on provider
+    // Get adapter based on provider (model is now passed to adapter factory)
     const getAdapter = () => {
         switch (provider) {
             case 'anthropic':
-                return anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
+                return anthropicText(model as Parameters<typeof anthropicText>[0])
             case 'gemini':
-                return gemini({ apiKey: process.env.GEMINI_API_KEY! } as any)
+                return geminiText(model as Parameters<typeof geminiText>[0])
             case 'ollama':
-                return ollama({ baseURL: process.env.OLLAMA_BASE_URL || 'http://localhost:11434' })
+                return ollamaText(model as Parameters<typeof ollamaText>[0])
+            case 'grok':
+                return createGrokText(model as Parameters<typeof createGrokText>[0], process.env.XAI_API_KEY!)
             default:
-                return openai()
+                return openaiText(model as Parameters<typeof openaiText>[0])
         }
     }
 
     const adapter = getAdapter()
 
-    // Stream chat response
+    // Stream chat response (no model parameter needed - it's in the adapter)
     const stream = chat({
-        adapter: adapter as any,
-        model: model as any,
+        adapter,
         messages: filteredMessages as any,
     })
 

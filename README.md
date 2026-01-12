@@ -4,7 +4,7 @@ A modern, full-stack AI chat application built with TanStack AI TanStack Start, 
 
 ## ✨ Features
 
-- 🤖 **Multi-Provider AI** - OpenAI, Anthropic, Google Gemini, Ollama (local)
+- 🤖 **Multi-Provider AI** - OpenAI, Anthropic, Google Gemini, xAI (Grok), Ollama (local)
 - 💬 **Real-time Streaming** - Natural typing animation for AI responses
 - 📚 **Persistent History** - Chat history stored in PostgreSQL
 - 🔍 **Full-Text Search** - Search across chats (⌘K / Ctrl+K)
@@ -27,6 +27,7 @@ A modern, full-stack AI chat application built with TanStack AI TanStack Start, 
 | **OpenAI** | GPT-4o, GPT-4o Mini, GPT-4 Turbo, GPT-3.5 Turbo |
 | **Anthropic** | Claude Sonnet 4.5, Claude 3.5 Sonnet, Claude 3.5 Haiku |
 | **Google** | Gemini Pro, Gemini 2.0 Flash |
+| **xAI** | Grok 4, Grok 3 |
 | **Ollama** | Llama 3 (+ any local model) |
 
 > See [TanStack AI docs](https://tanstack.com/ai) for more details.
@@ -85,6 +86,7 @@ DATABASE_URL=postgresql://user:password@localhost:5432/chatapp
 OPENAI_API_KEY=sk-...
 ANTHROPIC_API_KEY=sk-ant-...
 GEMINI_API_KEY=...
+XAI_API_KEY=xai-...
 
 # Ollama (optional)
 OLLAMA_BASE_URL=http://localhost:11434
